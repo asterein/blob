@@ -22,3 +22,4 @@ options:
 - [ ] Make blob-card and overall styling more easily configureable
 - [ ] Improve cli
 - [ ] Add more accessible conf for pagination (dropdown select? conf file for blobs per page?)
+- [ ] Add option for chronological vs reverse-chronological order
