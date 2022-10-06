@@ -37,10 +37,14 @@ html, body {
   padding: 0;
 }
 
-main {
+main, footer {
   margin: 0 auto;
   padding: 3rem;
   max-width: 900px;
+}
+
+footer {
+ text-align: center;
 }
 
 #too-smol {
