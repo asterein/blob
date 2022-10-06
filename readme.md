@@ -16,6 +16,7 @@ options:
 ```
 - You can also add blobs manually by creating a `*.blob` file in the `/blobs/` directory.
 - Note that blobs will appear in alphabetical order. The python cli currently names each blob with a time signature of year, month, day, hour, minute, and second of the post. 
+- Blobs only support plaintext at this time.
 
 **Todo**
 - [ ] Add support for styled blobs (`innerText` vs `innerHTML`)
