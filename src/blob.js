@@ -77,8 +77,10 @@ async function generateBlobStream (parentID, blobsPerPage, currentPage) {
   parent.innerHTML = "";
   const start = (currentPage - 1) * blobsPerPage;
   const end = blobsPerPage + start;
-  blobs.slice(start,end).forEach(async (blob) => {
-    if (!blob) return;
+  const pageBlobs = blobs.slice(start,end);
+  for (let index in pageBlobs) {
+    let blob = pageBlobs[index];
+    if (!blob) continue;
 
     async function getBlob (blobFile) {
       const blob = await fetch(`./blobs/${blobFile}`)
@@ -91,7 +93,7 @@ async function generateBlobStream (parentID, blobsPerPage, currentPage) {
     card.setAttribute('index', blobs.length-blobs.indexOf(blob)-1);
     card.setAttribute('name', blob);
     parent.appendChild(card);
-  })
+  }
 }
 
 function handleBlobPageClick (bpp, page, element) {
