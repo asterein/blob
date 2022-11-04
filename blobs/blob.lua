@@ -1,5 +1,5 @@
 -- Help
-HELP_TEXT = [[
+local HELP_TEXT = [[
 usage: blob.lua [-h] [-s] [-p] [-r]
 
 Small local blob management cli
@@ -12,16 +12,29 @@ options:
 ]]
 
 -- Settings
-ENCODING = "utf-8"
-BLOB_MAX = 256
-BLOB_PATH = "/path/to/blob/project/"
-MODE = "unix"
+local ENCODING = "utf-8"
+local BLOB_MAX = 256
 
-function syncBlobs()
-  for dir in io.popen([[ls -pa /path/to/blob/project/ | grep -v /]]):lines() do print(dir) end
+local BLOB_PATH = "/path/to/blobs"
+
+local function syncBlobs()
+  -- sync the blob index.json file
+  os.remove('index.json')
+  local index = io.open('index.json', 'w')
+  index:write('[\n')
+  index:write('\n]')
+  index:close()
+  local dir = io.open('ls ' ..BLOB_PATH)
+  print(dir)
+  --[[for name in dir:lines() do
+    if (string.sub(name, string.len(name)-5) == ".blob") then
+      print(name)
+    end
+  end]]
 end
 
-function newBlob()
+local function newBlob()
+  -- create a new blob
   print("New blob:\n")
   local blob = io.read("*l")
   local save = true
@@ -47,7 +60,7 @@ function newBlob()
   end
 end
 
-function isArgUsed(argPassed, shortArg, fullArg)
+local function isArgUsed(argPassed, shortArg, fullArg)
   if (argPassed == shortArg or argPassed == fullArg) then
    return true
   end
